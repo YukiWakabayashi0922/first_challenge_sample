@@ -51,7 +51,8 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roomba_500driver_meiji</depend>
   <depend>roscpp</depend>
-
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

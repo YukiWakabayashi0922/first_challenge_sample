@@ -10,6 +10,8 @@ project(first_challenge_sample)
 find_package(catkin REQUIRED COMPONENTS
   roomba_500driver_meiji
   roscpp
+  nav_msgs
+  sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
