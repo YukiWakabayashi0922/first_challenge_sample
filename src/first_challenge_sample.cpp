@@ -53,7 +53,7 @@ void FirstChallenge::run()
 void FirstChallenge::turn()
 {
     cmd_vel_.mode = 11;
-    cmd_vel_.cntl.linear.x = 0.1;
+    cmd_vel_.cntl.linear.x = 0.2;
     cmd_vel_.cntl.angular.z = M_PI/8;
 
     pub_cmd_vel_.publish(cmd_vel_);
