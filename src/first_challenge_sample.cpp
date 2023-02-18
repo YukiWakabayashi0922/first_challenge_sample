@@ -3,9 +3,9 @@
 FirstChallenge::FirstChallenge():private_nh_("~")
 {
     private_nh_.param("hz", hz_, {10});
-    sub_odom_ = nh_.subscribe("/roomba/odometry", 100, &FirstChallenge::odometry_callback, this);
-    sub_laser_ = nh_.subscribe("/scan", 100, &FirstChallenge::laser_callback, this);
-    pub_cmd_vel_ = nh_.advertise<roomba_500driver_meiji::RoombaCtrl>("/roomba/control", 1);
+    odom_sub_ = nh_.subscribe("/roomba/odometry", 1, &FirstChallenge::odometry_callback, this);
+    laser_sub_ = nh_.subscribe("/scan", 1, &FirstChallenge::laser_callback, this);
+    cmd_vel_pub_ = nh_.advertise<roomba_500driver_meiji::RoombaCtrl>("/roomba/control", 1);
 }
 
 void FirstChallenge::odometry_callback(const nav_msgs::Odometry::ConstPtr& msg)
@@ -24,17 +24,17 @@ void FirstChallenge::run()
     cmd_vel_.cntl.linear.x = 0.2;
     cmd_vel_.cntl.angular.z = M_PI/6;
 
-    pub_cmd_vel_.publish(cmd_vel_);
+    cmd_vel_pub_.publish(cmd_vel_);
 }
 
 void FirstChallenge::process()
 {
-    ros::Rate loop_late(hz_);
+    ros::Rate loop_rate(hz_);
     while(ros::ok())
     {
         run();
         ros::spinOnce();
-        loop_late.sleep();
+        loop_rate.sleep();
     }
 }
 
